@@ -1,0 +1,7 @@
+name: myenv
+
+dependencies:
+  - python = 3.8
+  - pandas
+  - xarray
+  - numpy
