@@ -11,6 +11,7 @@
 
 import pandas as pd
 import xarray
+import scipy
 
 
 print("Enter the exact name of the workbook. Please do include the file extension (e.g, .xlsx, .xls, etc):")
