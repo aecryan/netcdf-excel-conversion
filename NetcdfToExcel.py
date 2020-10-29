@@ -1,57 +1,44 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-#Project name: NetCDF --> Excel
-#Description: It receives a NetCDF file with a predefined format (should we elaborate here?) and returns the equivalent file in excel format. 
+#Project name: netCDF --> Excel
+#Description: It receives a netCDF file with a predefined format and returns the equivalent file in excel format. 
 #Programmers: Amir \& Ashley
 #Date: 07-09-2020
 
 
-# In[2]:
 
 
 #Loading the packages
-#The openpyxl should also be installed (it is essential for saving the dataframe as an excel file) 
 import pandas as pd
 import xarray as xr
 import numpy as np
 
 
-# In[3]:
 
 
-#Loading the NetCDF file
-# ds_disk = xr.open_dataset("8-Plagioclase-trace-elements.nc")
-#sheet names:
-#3-WR-Major-and-trace-elements
-#4-Amphibole-Major-elements
-#5-OPX-Major-elements
-#6-Glass-Major-elements
-#7-Plagioclase-Major-elements
-#8-Plagioclase-trace-elements
-
-sheet_name = "3-WR-Major-and-trace-elements"
-ds_disk = xr.open_dataset("../data/"+sheet_name+".nc")
+print("Enter the exact name of the netCDF file. Please do include the file extension (e.g., .nc):")
+netCDF_file_name = input()
 
 
-# In[4]:
+
+
+
+ds_disk = xr.open_dataset("./data/input/"+netCDF_file_name)
+
+
 
 
 #Fetching the global attributes
 ds_global_attributes = ds_disk.attrs
 
 
-# In[5]:
 
 
-#Fetching the indexes (It will not be used later on as the indices are also available in the variables)
-ds_indices = list(ds_disk.coords.indexes["SAMPLE NAME"])
+#Fetching the indexes (It will not be used later on as the indeces are also available in the variables)
+ds_indeces = list(ds_disk.coords.indexes["SAMPLE NAME"])
 
 
-# In[6]:
 
 
 #Fetching the variables
@@ -60,7 +47,6 @@ ds_disk_variables = ds_disk.to_dataframe().reset_index()
 column_names = list(ds_disk_variables.columns)
 
 
-# In[7]:
 
 
 # Retrieve the columns order
@@ -94,17 +80,6 @@ right = [i for i in right_dict]
 ds_disk_variables = ds_disk_variables[left+right]
 
 
-# In[8]:
-
-
-# #Reorganising the order of the columns
-# left = list(ds_disk_variables.columns)[:10]
-# right = list(ds_disk_variables.columns)[10:]
-# left = ["SAMPLE NAME", "IGSN", "SPECIES", "sample preparation", "chemical treatment", "description", "grain spot ID", "spot location", "calculated average", "number of replicates"]
-# ds_disk_variables = ds_disk_variables[left+right]
-
-
-# In[9]:
 
 
 #Creating an empty dictionary where the keys are the column names, and the values refer to the properties of those columns 
@@ -120,7 +95,6 @@ for j in right:
     ds_dict[j]["comment"] = ""
 
 
-# In[10]:
 
 
 #Populating the dictionary 
@@ -137,7 +111,6 @@ for j in right:
     ds_dict[j]["comment"] = ds_disk.data_vars[j].attrs["comment"]
 
 
-# In[11]:
 
 
 #Creating a dataframe for the left side of the tables's header
@@ -150,7 +123,6 @@ g.loc[0] = [i if i in left else np.nan for i in ds_disk_variables.columns]
 a1 = pd.concat([g,s])
 
 
-# In[12]:
 
 
 #Creating a dataframe for the right side of the tables's header
@@ -165,7 +137,6 @@ v.loc[0] = [i if i in right else np.nan for i in ds_disk_variables.columns]
 a2 = pd.concat([v,h])
 
 
-# In[13]:
 
 
 #Manual insertion of some values in the table (Do they exist in the NetCDF file? if so, where?)
@@ -174,21 +145,18 @@ a2.iloc[1]["number of replicates"] = "METHOD CODE [more info]:"
 a2.iloc[2]["number of replicates"] = "UNIT [list]:"
 
 
-# In[14]:
 
 
 #Here, the header to the table is created
 a3 = pd.concat([a2,a1])
 
 
-# In[15]:
 
 
 #Here, the header and variables are added together
 a4 = pd.concat([a3,ds_disk_variables])
 
 
-# In[16]:
 
 
 #Changing the columns names
@@ -198,7 +166,6 @@ k[0] = ds_global_attributes["Description"]
 a4.columns = k
 
 
-# In[17]:
 
 
 #Replacing the dataframe index by the column "SAMPLE NAME"
@@ -208,9 +175,8 @@ a4.index = a4[ds_global_attributes["Description"]]
 a4 = a4.drop(columns=[ds_global_attributes["Description"]])
 
 
-# In[18]:
 
 
 #Saving the dataframe as an excel file
-a4.to_excel('../data/'+sheet_name+".xlsx", sheet_name=ds_global_attributes["Title"])
+a4.to_excel("./data/output/"+netCDF_file_name.replace(".","")+".xlsx", sheet_name=ds_global_attributes["Title"])
 
