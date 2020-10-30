@@ -3,7 +3,7 @@ This repository contains code used to convert between files in netCDF (.nc) to E
 
 ## How to use these scripts
 This repository contains two scripts for conversion between Excel (.xlxs and .xls) and netCDF (.nc) files. They are called, ExcelToNetcdf.py and NetcdfToExcel.py, respectively.
-You can run them on their own or in a Docker container. The Docker container can be built via the Dockerfile in the repository, or from the image on DockerHub https://hub.docker.com/r/acryan/netcdf-excel-conversion.
+You can run them on their own or in a Docker container. The Docker container can be built via the Dockerfile in the repository, or from the image on DockerHub https://hub.docker.com/r/acryan/netcdf-excel-conversion. We give instructions below on how to pull the image from DockerHub and run the script inside a container.
 
 ## Adding your files for conversion
 1. After cloning the repository, on your local machine, create an empty folder called `data/` and two other folders inside it called `input/` and `output/`.
