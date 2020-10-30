@@ -10,7 +10,7 @@ You can run them on their own or in a Docker container. The Docker container can
 2. Copy all files to be converted into the `data/input/` folder. These files should be Excel and/or netCDF files. 
 
 ## Steps to run the code
-1. `cd` into the root directory of this repository on your local machine. **Remember:** You must have added the three folders described above and copied your files for conversion into the data/input folder.
+1. `cd` into the root directory of this repository on your local machine. **Remember:** You must have added the three folders described above and copied your files for conversion into the `data/input/` folder.
 2. In the root directory, start the Docker container: `docker run -it -v $(pwd):/work netcdf-excel-conversion /bin/bash` (you will end up with a bash prompt inside the container)
 3. Go to the directory that contains the python script: `cd /work`
 4. Run the python script: `python ExcelToNetcdf.py`. Each time you convert a file, you will be prompted to input the name of the original file. In the case of converting Excel files, you will also need to input the name of the individual sheet to be converted.
