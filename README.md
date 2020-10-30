@@ -1,5 +1,5 @@
 # netcdf-excel-conversion
-This repository contains code used to convert between files in NetCDF (.nc) to Excel (.xlsx) and from .xlsx to NetCDF (.nc). 
+This repository contains code used to convert between files in netCDF (.nc) to Excel (.xlsx, .xls) and from Excel to netCDF. In the Excel -> netCDF direction, it is set up to convert individual sheets within a workbook to netCDF format.
 
 ## How to use these scripts
 This repository contains two scripts for conversion between Excel (.xlxs and .xls) and netCDF (.nc) files. They are called, ExcelToNetcdf.py and NetcdfToExcel.py, respectively.
