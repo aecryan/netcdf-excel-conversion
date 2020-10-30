@@ -17,4 +17,4 @@ You can run them on their own or in a Docker container. The Docker container can
 5. To exit the container, run `exit`
 
 ## Where are my converted files?
-All converted files will be written to the `data/output` folder.
+All converted files will be written to the `data/output` folder you created in Step 1.
