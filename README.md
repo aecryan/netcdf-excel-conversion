@@ -6,8 +6,8 @@ This repository contains two scripts for conversion between Excel (.xlxs and .xl
 You can run them on their own or in a Docker container. The Docker container can be built via the Dockerfile in the repository, or from the image on DockerHub https://hub.docker.com/r/acryan/netcdf-excel-conversion. We give instructions below on how to pull the image from DockerHub and run the script inside a container.
 
 ## Adding your files for conversion
-1. Cloning the repository to your local machine
-2. In the `netcdf-excel-conversion` folder, create an empty folder called `data/` and two other folders inside it called `input/` and `output/`.
+1. Clone the repository to your local machine and `cd` into the`netcdf-excel-conversion` folder.
+2. Create an empty folder here called `data/` and two other folders inside it called `input/` and `output/`.
 3. Copy all files to be converted into the `data/input/` folder. These files should be Excel and/or netCDF files. Leave `data/output/` empty for now. 
 
 ## Steps to run the code in the netcdf-excel-conversion Docker container
